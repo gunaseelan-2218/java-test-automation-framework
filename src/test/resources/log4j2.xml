@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration packages="org.apache.logging.log4j.core">
+    
+    <!-- ========== APPENDERS ========== -->
+    <Appenders>
+        
+        <!-- Console Appender for real-time execution logging -->
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] [%15.15t] [%c{1}] - %m%n"/>
+        </Console>
+        
+        <!-- Single File Appender - All logs in one file -->
+        <!-- Thread-safe writing supports parallel execution -->
+        <File name="FILE" fileName="target/cucumber-framework.log" append="true" immediateFlush="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] [%15.15t] [%c{1}] - %m%n"/>
+            <!-- 
+                Pattern explanation:
+                %d{yyyy-MM-dd HH:mm:ss} - Timestamp
+                [%-5p]                  - Log level (padded to 5 chars)
+                [%thread]               - Thread name (important for parallel execution)
+                [%c{1}]                 - Class name (simplified)
+                %m%n                    - Message and newline
+            -->
+        </File>
+        
+    </Appenders>
+    
+    <!-- ========== LOGGERS ========== -->
+    <Loggers>
+        
+        <!-- Framework Logger - DEBUG level for detailed logging -->
+        <Logger name="com.test.framwork.cucumber" level="DEBUG" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE"/>
+        </Logger>
+        
+        <!-- Selenium Logger - WARN level to reduce noise -->
+        <Logger name="org.openqa.selenium" level="WARN" additivity="false">
+            <AppenderRef ref="FILE"/>
+        </Logger>
+        
+        <!-- Root Logger - INFO level -->
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE"/>
+        </Root>
+        
+    </Loggers>
+    
+</Configuration>
