@@ -82,7 +82,7 @@ Both frameworks follow industry best practices with modular, reusable components
 
 ```
 .
-├── cucumber-framework/                    # BDD Testing Framework
+├── automation-framework/                    # BDD Testing Framework
 │   ├── pom.xml                           # Maven configuration
 │   ├── src/
 │   │   ├── main/
@@ -109,25 +109,7 @@ Both frameworks follow industry best practices with modular, reusable components
 │   │   └── screenshots/                # Failure screenshots
 │   └── test-output/                    # TestNG output
 │
-└── automation-ui-framework/               # UI Automation Framework
-    ├── pom.xml
-    ├── testng.xml                       # TestNG suite configuration
-    ├── src/
-    │   ├── main/java/com/framework/
-    │   │   ├── base/                   # Base classes for pages
-    │   │   ├── pages/                  # Page Object classes
-    │   │   ├── utils/                  # Utility methods
-    │   │   └── constants/              # Constants
-    │   ├── test/java/com/framework/test/
-    │   │   ├── login/                  # Login test classes
-    │   │   └── [other tests]/
-    │   └── resources/
-    │       ├── config.properties       # Browser/environment config
-    │       └── testdata/               # Test data (JSON files)
-    ├── target/
-    ├── test-output/                    # Test reports
-    └── testng.xml
-```
+└── 
 
 ---
 
