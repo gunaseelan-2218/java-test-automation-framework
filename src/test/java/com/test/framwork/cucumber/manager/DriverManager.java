@@ -97,7 +97,6 @@ public class DriverManager {
 			logger.info("Launching ChromeDriver (Local)");
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--disable-gpu", "--window-size=1920,1080");
-			chromeOptions.addArguments("--headless");
 			chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 			return new ChromeDriver(chromeOptions);
 
@@ -105,7 +104,6 @@ public class DriverManager {
 			logger.info("Launching FirefoxDriver (Local)");
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 			firefoxOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-			firefoxOptions.addArguments("--headless");
 			return new FirefoxDriver(firefoxOptions);
 
 		case Constants.BROWSER_EDGE:
@@ -113,7 +111,6 @@ public class DriverManager {
 			EdgeOptions edgeOptions = new EdgeOptions();
 			edgeOptions.addArguments("--disable-gpu", "--window-size=1920,1080");
 			edgeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-			edgeOptions.addArguments("--headless");
 			return new EdgeDriver(edgeOptions);
 
 		case Constants.BROWSER_SAFARI:
