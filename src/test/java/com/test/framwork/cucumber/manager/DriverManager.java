@@ -4,9 +4,14 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.slf4j.Logger;
 
 import com.test.framwork.cucumber.constants.Constants;
@@ -78,7 +83,7 @@ public class DriverManager {
 	}
 
 	/**
-	 * Create WebDriver instance based on browser type
+	 * Create local WebDriver instance with proper browser options
 	 * 
 	 * @param browserName - browser type (chrome, firefox, edge, safari)
 	 * @return WebDriver instance
@@ -89,25 +94,37 @@ public class DriverManager {
 
 		switch (browserName.toLowerCase()) {
 		case Constants.BROWSER_CHROME:
-			logger.info("Launching ChromeDriver");
-			return new ChromeDriver();
+			logger.info("Launching ChromeDriver (Local)");
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("--disable-gpu", "--window-size=1920,1080");
+			chromeOptions.addArguments("--headless");
+			chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+			return new ChromeDriver(chromeOptions);
 
 		case Constants.BROWSER_FIREFOX:
-			logger.info("Launching FirefoxDriver");
-			return new FirefoxDriver();
+			logger.info("Launching FirefoxDriver (Local)");
+			FirefoxOptions firefoxOptions = new FirefoxOptions();
+			firefoxOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+			firefoxOptions.addArguments("--headless");
+			return new FirefoxDriver(firefoxOptions);
 
 		case Constants.BROWSER_EDGE:
-			logger.info("Launching EdgeDriver");
-			return new EdgeDriver();
+			logger.info("Launching EdgeDriver (Local)");
+			EdgeOptions edgeOptions = new EdgeOptions();
+			edgeOptions.addArguments("--disable-gpu", "--window-size=1920,1080");
+			edgeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+			edgeOptions.addArguments("--headless");
+			return new EdgeDriver(edgeOptions);
 
 		case Constants.BROWSER_SAFARI:
-			logger.info("Launching SafariDriver");
-			return new SafariDriver();
+			logger.info("Launching SafariDriver (Local)");
+			SafariOptions safariOptions = new SafariOptions();
+			safariOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+			return new SafariDriver(safariOptions);
 
 		default:
 			String errorMsg = String.format(
-				"Unsupported browser type: %s. Supported browsers: chrome, firefox, edge, safari",
-				browserName);
+					"Unsupported browser type: %s. Supported browsers: chrome, firefox, edge, safari", browserName);
 			logger.error(errorMsg);
 			throw new TestException(errorMsg);
 		}
